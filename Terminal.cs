@@ -8,7 +8,6 @@ namespace BankkontoInlämningsuppgift
 {
     internal class Terminal
     {
-        public string Name { get; set; }
         private Bank bank;
 
         public Terminal(Bank bank)
@@ -46,7 +45,7 @@ namespace BankkontoInlämningsuppgift
                     ShowMainMenu();
                     break;
                 case 5:
-                    //Visa saldo för specifikt konto
+                    SpecificAccountBalanceMenu();
                     break;
                 
 
@@ -72,10 +71,22 @@ namespace BankkontoInlämningsuppgift
             Console.WriteLine("Vilket kontonr vill du göra ett uttag från? ");
             int userChoiceAccountNmbr = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("Hur mycket vill du ta ut?");
-            int userChoiceDeposit = Convert.ToInt32(Console.ReadLine());
-            bank.WithdrawFromAccount(userChoiceAccountNmbr, userChoiceDeposit);
+            int userChoiceWithdraw = Convert.ToInt32(Console.ReadLine());
+            bank.WithdrawFromAccount(userChoiceAccountNmbr, userChoiceWithdraw);
             ShowMainMenu();
         }
+
+        public void SpecificAccountBalanceMenu()
+        {
+            bank.ShowAllBankAccounts();
+            Console.WriteLine("Vilket bankkonto vill du se saldo för?");
+            int userChoiceAccountNmbr = Convert.ToInt32(Console.ReadLine());
+            bank.ShowBalanceOnAccount(userChoiceAccountNmbr);
+            ShowMainMenu();
+
+        }
+
+        //Hantera fel
         
 
  

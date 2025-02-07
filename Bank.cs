@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace BankkontoInlämningsuppgift
 {
-    internal class Bank //För att hantera menyn och terminal
+    internal class Bank
     {
         public List<Account> AccountList { get; set; } = new List<Account>();
         private Terminal bankTerminal;
-        public string Namn { get; set; }
 
         public Bank()
         {
@@ -46,14 +45,14 @@ namespace BankkontoInlämningsuppgift
             }
         }
 
-        public List<Account> RetrieveAccountList() //Beehövs denna?
+        public List<Account> RetrieveAccountList() //Behövs denna?
         {
             return AccountList;
         }
 
         public void DepositToAccount(int userChoiceAccountNmbr, int userBalanceDeposit)
         {
-            if (userBalanceDeposit >= 0) 
+            if (userBalanceDeposit >= 0)
             {
                 foreach (Account account in AccountList)
                 {
@@ -61,7 +60,7 @@ namespace BankkontoInlämningsuppgift
                     {
                         int currentAccountBalance = account.AccountBalance;
                         account.AccountBalance = userBalanceDeposit + currentAccountBalance;
-                        Console.WriteLine($"Du har nu satt in {account.AccountBalance} i kontonr: {account.AccountNumber}");
+                        Console.WriteLine($"Kontonummer: {account.AccountNumber}\nNuvarande saldo: {account.AccountBalance} ");
 
                     }
                 }
@@ -82,7 +81,7 @@ namespace BankkontoInlämningsuppgift
                     {
                         int currentAccountBalance = account.AccountBalance;
                         account.AccountBalance = userBalanceWithdraw + currentAccountBalance;
-                        Console.WriteLine($"Du har nu satt in {account.AccountBalance} i kontonr: {account.AccountNumber}");
+                        Console.WriteLine($"Kontonummer: {account.AccountNumber}\nNuvarande saldo: {account.AccountBalance} ");
 
                     }
                 }
@@ -92,6 +91,24 @@ namespace BankkontoInlämningsuppgift
                 Console.WriteLine("Uttag måste vara negativ");
             }
         }
+
+        public void ShowBalanceOnAccount(int userChoiceAccountNmbr)
+        {
+            foreach (Account account in AccountList)
+            {
+                if (account.AccountNumber == userChoiceAccountNmbr)
+                {
+                    Console.WriteLine($"Saldo för {account.AccountNumber} är {account.AccountBalance}");
+                }
+            }
+        }
+
+        public int HandleWrongAccountNumberInput(int userChoiceAccountNmber, out int userChoiceAccountNmbr)
+        {
+
+        }
+
+
 
     }
 }

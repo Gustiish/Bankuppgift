@@ -22,7 +22,7 @@ namespace BankkontoInlämningsuppgift
                 }
                 else
                 {
-                    Console.WriteLine("Saldo kan inte vara mindre än noll!");
+                    Console.WriteLine("Saldo kan inte vara mindre än noll!"); //Om det nya saldot blir under noll triggas denna. 
                 }
 
             }
@@ -48,7 +48,7 @@ namespace BankkontoInlämningsuppgift
             }
         }
 
-        public Account() //En konstruktor som generar 
+        public Account() //En konstruktor som generar nya konton med olika kontonr
         {
             this.AccountNumber = GenerateAccountNumbers();
             this.AccountBalance = 0;
