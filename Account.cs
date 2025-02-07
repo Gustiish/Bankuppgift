@@ -30,7 +30,8 @@ namespace BankkontoInlämningsuppgift
 
         private int accountNumber;
 
-        public int AccountNumber
+        //Ifall jag i framtiden vill lägga till nya kontonr måste de följa reglerna. 
+        public int AccountNumber 
         {
             get { return accountNumber; }
             set
@@ -47,7 +48,7 @@ namespace BankkontoInlämningsuppgift
             }
         }
 
-        public Account()
+        public Account() //En konstruktor som generar 
         {
             this.AccountNumber = GenerateAccountNumbers();
             this.AccountBalance = 0;

@@ -14,7 +14,6 @@ namespace BankkontoInlämningsuppgift
         public Terminal(Bank bank)
         {
             this.bank = bank;
-            ShowMainMenu();
         }
 
         public void ShowMainMenu()
@@ -23,6 +22,7 @@ namespace BankkontoInlämningsuppgift
             Console.WriteLine("2: För att göra en insättning på ett konto");
             Console.WriteLine("3: För att göra ett uttag på ett konto");
             Console.WriteLine("4: Skriv ut en lista på alla kontonr och saldon");
+            Console.WriteLine("5: Visa saldo för specifikt konto");
             MainMenuInput();
         }
 
@@ -37,15 +37,18 @@ namespace BankkontoInlämningsuppgift
                     break;
                 case 2:
                     DepositMenu();
-                    ShowMainMenu();
                     break;
                 case 3:
-                    //
+                    WithdrawMenu();
                     break;
                 case 4:
                     bank.ShowAllBankAccountsAndBalances();
                     ShowMainMenu();
                     break;
+                case 5:
+                    //Visa saldo för specifikt konto
+                    break;
+                
 
             }
 
@@ -55,10 +58,23 @@ namespace BankkontoInlämningsuppgift
         {
             bank.ShowAllBankAccounts();
             Console.WriteLine("Vilket kontonr vill du göra en insättning till? ");
-            int? accountNmbr = bank.RetrieveSpecificAccount();
-            Console.WriteLine(accountNmbr);
-            
+            int userChoiceAccountNmbr = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Hur mycket vill du sätta in?");
+            int userChoiceDeposit = Convert.ToInt32(Console.ReadLine());
+            bank.DepositToAccount(userChoiceAccountNmbr, userChoiceDeposit);
+            ShowMainMenu();
 
+        }
+
+        public void WithdrawMenu()
+        {
+            bank.ShowAllBankAccounts();
+            Console.WriteLine("Vilket kontonr vill du göra ett uttag från? ");
+            int userChoiceAccountNmbr = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Hur mycket vill du ta ut?");
+            int userChoiceDeposit = Convert.ToInt32(Console.ReadLine());
+            bank.WithdrawFromAccount(userChoiceAccountNmbr, userChoiceDeposit);
+            ShowMainMenu();
         }
         
 

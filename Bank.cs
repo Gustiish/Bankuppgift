@@ -16,6 +16,7 @@ namespace BankkontoInlämningsuppgift
         {
             LoadBankAccounts();
             this.bankTerminal = new Terminal(this);
+            bankTerminal.ShowMainMenu();
         }
 
         public void LoadBankAccounts()
@@ -28,46 +29,68 @@ namespace BankkontoInlämningsuppgift
 
         public void ShowAllBankAccountsAndBalances()
         {
-            int i = 1;
             foreach (Account account in AccountList)
             {
 
-                Console.WriteLine($"Konto nummer {i}\nKontonr: {account.AccountNumber}\n{account.AccountBalance}");
-                i++;
+                Console.WriteLine($"Kontonr: {account.AccountNumber}\n{account.AccountBalance}");
             }
         }
 
         public void ShowAllBankAccounts()
         {
-            int i = 1;
             foreach (Account account in AccountList)
             {
 
-                Console.WriteLine($"Konto nummer {i}\nKontonr: {account.AccountNumber}");
-                i++;
+                Console.WriteLine($"Kontonr: {account.AccountNumber}");
+
             }
         }
 
-        public List<Account> RetrieveAccountList()
+        public List<Account> RetrieveAccountList() //Beehövs denna?
         {
             return AccountList;
         }
 
-        public int? RetrieveSpecificAccount() 
+        public void DepositToAccount(int userChoiceAccountNmbr, int userBalanceDeposit)
         {
-            int userChoiceAccountNmbr = Convert.ToInt32(Console.ReadLine());
-            foreach (Account account in AccountList)
+            if (userBalanceDeposit >= 0) 
             {
-                if (account.AccountNumber == userChoiceAccountNmbr)
+                foreach (Account account in AccountList)
                 {
-                    int chosenAccount = account.AccountNumber;
-                    return chosenAccount;
+                    if (account.AccountNumber == userChoiceAccountNmbr)
+                    {
+                        int currentAccountBalance = account.AccountBalance;
+                        account.AccountBalance = userBalanceDeposit + currentAccountBalance;
+                        Console.WriteLine($"Du har nu satt in {account.AccountBalance} i kontonr: {account.AccountNumber}");
+
+                    }
                 }
             }
+            else
+            {
+                Console.WriteLine("Insättning måste vara positiv");
+            }
+        }
 
-            Console.WriteLine("Välj ett legit kontonr");
-            return null;
+        public void WithdrawFromAccount(int userChoiceAccountNmbr, int userBalanceWithdraw)
+        {
+            if (userBalanceWithdraw <= 0)
+            {
+                foreach (Account account in AccountList)
+                {
+                    if (account.AccountNumber == userChoiceAccountNmbr)
+                    {
+                        int currentAccountBalance = account.AccountBalance;
+                        account.AccountBalance = userBalanceWithdraw + currentAccountBalance;
+                        Console.WriteLine($"Du har nu satt in {account.AccountBalance} i kontonr: {account.AccountNumber}");
 
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine("Uttag måste vara negativ");
+            }
         }
 
     }
