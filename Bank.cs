@@ -44,12 +44,6 @@ namespace BankkontoInlämningsuppgift
 
             }
         }
-
-        public List<Account> RetrieveAccountList() //Behövs denna?
-        {
-            return AccountList;
-        }
-
         public void DepositToAccount(int userChoiceAccountNmbr, int userBalanceDeposit)
         {
             if (userBalanceDeposit >= 0)
@@ -103,12 +97,10 @@ namespace BankkontoInlämningsuppgift
             }
         }
 
-        public int HandleWrongAccountNumberInput(int userChoiceAccountNmber, out int userChoiceAccountNmbr)
-        {
-
-        }
+    
 
 
 
     }
 }
+
